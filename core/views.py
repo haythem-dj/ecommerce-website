@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Product, Order
+from .models import Product, Order, WishList
 from users.models import Profile
 
 def home(request):
@@ -30,6 +30,57 @@ def product(request):
 	}
 
 	return render(request, "core/product.html", context=context)
+
+@login_required(login_url="RegisterLogin")
+def wishlist(request):
+	profile = Profile.objects.filter(user=request.user).first()
+	wishlist = WishList.objects.filter(profile=profile).first()
+
+	context = {
+		"products": wishlist.products.all()
+	}
+
+	return render(request, "core/wishlist.html", context=context)
+
+@login_required(login_url="RegisterLogin")
+def add_to_wishlist(request):
+	id = request.GET.get("id", None)
+
+	if not id.isnumeric():
+		return redirect("home")
+
+	id = int(id)
+
+	profile = Profile.objects.filter(user=request.user).first()
+	product = Product.objects.filter(id=id).first()
+
+	if not product:
+		return redirect("home")
+
+	wishlist = WishList.objects.filter(profile=profile).first()
+
+	wishlist.products.add(product)
+	return redirect("home")
+
+@login_required(login_url="RegisterLogin")
+def remove_from_wishlist(request):
+	id = request.GET.get("id", None)
+
+	if not id.isnumeric():
+		return redirect("home")
+
+	id = int(id)
+
+	profile = Profile.objects.filter(user=request.user).first()
+	product = Product.objects.filter(id=id).first()
+
+	if not product:
+		return redirect("home")
+
+	wishlist = WishList.objects.filter(profile=profile).first()
+
+	wishlist.products.remove(product)
+	return redirect("wishlist")
 
 @login_required(login_url="RegisterLogin")
 def add_to_cart(request):

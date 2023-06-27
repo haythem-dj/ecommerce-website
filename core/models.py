@@ -12,6 +12,13 @@ class Product(models.Model):
 	def __str__(self):
 		return self.title
 
+class WishList(models.Model):
+	products = models.ManyToManyField(Product, null=True, blank=True)
+	profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f"{self.profile.user.username}'s wishlist"
+
 class Order(models.Model):
 	products = models.ManyToManyField(Product)
 	date_created = models.DateTimeField(auto_now_add=True)

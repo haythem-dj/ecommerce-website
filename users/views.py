@@ -3,6 +3,7 @@ from django.contrib.auth import logout, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from core.models import WishList
 
 def RegisterLoginView(request):
 	if request.user.is_authenticated:
@@ -51,6 +52,9 @@ def RegisterLoginView(request):
 			auth_login(request, user)
 			profile = Profile(user=user)
 			profile.save()
+
+			wishlist = WishList(profile=profile)
+			wishlist.save()
 
 			return redirect("home")
 

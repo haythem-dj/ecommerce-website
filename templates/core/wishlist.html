@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block pageTitle %}Wish List{% endblock %}
+
+{% block content %}
+<div class="single-product-area">
+    <div class="container">
+        <div class="row">
+        	{% if products %}
+	            {% for product in products %}
+	            <div class="col-md-3 col-sm-6">
+	                <div class="single-shop-product">
+	                    <div class="product-upper">
+	                        <img src="{% static 'core/img/product-2.jpg' %}" alt="">
+	                    </div>
+	                    <h2><a href="">{{ product.title }}</a></h2>
+	                    <div class="product-carousel-price">
+	                        <ins>${{ product.price }}</ins>
+	                        {% if product.old_price %}
+	                        <del>${{ product.old_price }}</del>
+	                        {% endif %}
+	                    </div>  
+	                    
+	                    <div class="product-option-shop">
+	                        <a class="add_to_cart_button" rel="nofollow" href="remove_from_wishlist?id={{ product.id }}">Remove from wishlist</a>
+	                    </div>
+	                    <div class="product-option-shop">
+	                        <a class="add_to_cart_button" rel="nofollow" href="add_to_cart?id={{ product.id }}">Add to cart</a>
+	                    </div>
+	                </div>
+	            </div>
+	            {% endfor %}
+        	{% else %}
+        	<h1 class="text-center">Your Wishlist is empty</h1>
+        	{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
