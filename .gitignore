@@ -4,3 +4,6 @@
 
 /template/
 /env/
+
+__pycache__/
+migrations/
