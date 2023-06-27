@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block pageTitle %} Home {% endblock %}
+
+{% block content %}
+<!-- <div class="maincontent-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Latest Products</h2>
+                    <div class="product-carousel">
+                        {% for product in latest %}
+                        <div class="single-product">
+                            <div class="product-f-image">
+                                <img src="{% static 'core/img/product-1.jpg' %}" alt="">
+                                <div class="product-hover">
+                                    <a href="product?id={{ product.id }}" class="view-details-link">See details</a>
+                                </div>
+                            </div>
+                            
+                            <h2><a href="product?id={{ product.id }}">{{ product.title }}</a></h2>
+                            
+                            <div class="product-carousel-price">
+                                <ins>${{ product.price }}</ins>
+                                {% if product.old_price %}
+                                <del>${{ product.old_price }}</del>
+                                {% endif %}
+                            </div> 
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3 col-sm-6">
+                <div class="single-shop-product">
+                    <div class="product-upper">
+                        <img src="{% static 'core/img/product-2.jpg' %}" alt="">
+                    </div>
+                    <h2><a href="">{{ product.title }}</a></h2>
+                    <div class="product-carousel-price">
+                        <ins>${{ product.price }}</ins>
+                        {% if product.old_price %}
+                        <del>${{ product.old_price }}</del>
+                        {% endif %}
+                    </div>  
+                    
+                    <div class="product-option-shop">
+                        <a class="add_to_cart_button" rel="nofollow" href="add_to_cart?id={{ product.id }}">Add to cart</a>
+                    </div>                       
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

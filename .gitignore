@@ -1,0 +1,6 @@
+*.sqlite3
+*.sublime-workspace
+*.sublime-project
+
+/template/
+/env/

@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/mdb.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}">
+	<title>ecommerce - {% block pageTitle %}{% endblock %}</title>
+</head>
+<body class="text-center">
+	<div class="container" style="width: 26rem;">
+		{% block content %}{% endblock %}
+	</div>
+	<script type="text/javascript" src="{% static 'users/js/mdb.min.js' %}"></script>
+</body>
+</html>

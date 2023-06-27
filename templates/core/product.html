@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block pageTitle %}Product{% endblock %}
+
+{% block content %}
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-product-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="product-inner">
+                                <h2 class="product-name">{{ product.title }}</h2>
+                                <div class="product-inner-price">
+                                    <ins>${{ product.price }}</ins>
+                                    {% if product.old_price %}
+                                    <del>${{ product.old_price }}</del>
+                                    {% endif %}
+                                </div>    
+                                
+                                <form action="add_to_cart" class="cart">
+                                    <input type="hidden" name="id" value="{{ product.id }}">
+                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                </form>   
+                                
+                                <div role="tabpanel">
+                                    <div class="tab-content">
+                                        {% if product.description %}
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <h2>Product Description :</h2>  
+                                            {{ product.description }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img src="{% static 'core/img/product-2.jpg' %}" alt="">
+                                </div>
+                                
+                                <div class="product-gallery">
+                                    <img src="{% static 'core/img/product-thumb-1.jpg' %}" alt="">
+                                    <img src="{% static 'core/img/product-thumb-2.jpg' %}" alt="">
+                                    <img src="{% static 'core/img/product-thumb-3.jpg' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
